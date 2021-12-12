@@ -1,0 +1,16 @@
+.headerCard{    
+    display: flex;
+    align-items:flex-start;
+    flex-direction: column-reverse;
+    width: 100%;
+    flex:1;
+}
+
+@media (max-width:1024px) {
+    .headerCard{
+        flex-direction: column;
+    }
+    .comments{
+        display: none;
+    }
+}

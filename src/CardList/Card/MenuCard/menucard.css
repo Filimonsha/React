@@ -1,0 +1,24 @@
+*{
+    align-items: center;
+}
+.menuCard{
+    display: flex;
+    justify-content: space-between;
+}
+.rating{
+    width: 93px;
+    display: flex;
+    justify-content: space-between;
+}
+.anotherOptions{
+    width: 110px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (min-width:1024px) {
+    .menuCard{
+        display: none;
+        background:red;
+    }
+}

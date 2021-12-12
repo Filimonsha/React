@@ -1,0 +1,10 @@
+.imgPrevie{
+    width: 320px;
+    height: 178px;
+    margin-right: 38px;
+}
+@media (max-width:1024px) {
+    .imgPrevie{
+        margin-right: 0;
+    }
+}
