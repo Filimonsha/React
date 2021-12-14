@@ -44,7 +44,6 @@ button {
 @media all and (min-width: 1540px) {
   .card {
     padding: 20px 60px;
-    max-height: 147px;
     cursor: pointer;
   }
   .card:hover, .card:focus-within {

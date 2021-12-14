@@ -5,7 +5,19 @@
     width: 100%;
     flex:1;
 }
-
+.viewed{
+    display:flex;
+    align-items:center;
+    font-size: 14px;
+    line-height: 16px;
+    color: #999999;
+}
+.viewed svg{
+    margin-right: 5px;
+}
+h4{
+    margin-bottom: 10px;
+}
 @media (max-width:1024px) {
     .headerCard{
         flex-direction: column;

@@ -44,7 +44,12 @@ module.exports={
         {
             test:GLOBAL_CSS_REGEXP,
             use:['style-loader','css-loader']
-        }
+        },
+        {
+            //IMAGE LOADER
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loader:'file-loader'
+        },
     ]
     },
     plugins:[

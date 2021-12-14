@@ -1,10 +1,41 @@
 .cardPublicate{
     display: flex;
     width: 100%;
+    flex-direction: row-reverse;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
+    margin-bottom: 12px;
 }
+.name{
+    font-size: 14px;
+line-height: 16px;
 
+color: #CC6633;
+}
+ span{
+    font-size: 14px;
+    line-height: 16px;
+    color: #999999;
+}
+.deckstopSpan{
+    margin-right: 6px;
+    
+}
+img{
+    margin-right: 7px;
+}
+.rating{
+        display: flex;
+    align-items:center;
+    margin-left: 37px;
+}
+.dekstopControl{
+    display: flex;
+    align-items:center;
+    flex-direction: row-reverse;
+    position: absolute;
+    right: 45px;
+}
 @media (max-width:1023px) {
     .deckstopSpan,.rating   {
         display: none;
