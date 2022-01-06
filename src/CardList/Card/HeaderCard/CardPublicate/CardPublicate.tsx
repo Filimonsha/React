@@ -3,18 +3,48 @@ import styles from './cardpublicate.css';
 // const URL=process.env.PUBLIC_URL;
 import img from './avatar.png';
 import control from './deckstopControl.png'
+import { Dropdown } from '../../../../Content/Dropdown';
+import { GenericList } from '../../../../Content/GenericList';
+import { generateIndex } from '../../../../utils/generateIndex';
+
 export function CardPublicate() {
+    const LIST=[
+      {
+        
+          id:generateIndex(),
+          text:'Айтем 1',
+          onClick:()=>{console.log("Вы нажали")},
+          className: "first"
+      },
+      {
+          id:generateIndex(),
+          text:'Айтем 2',
+          onClick:()=>{console.log("Вы нажали")},
+          className: "second"
+      }
+  ]
   return (
     <div className={styles.cardPublicate}>
       <div className={styles.dekstopControl}>
         <div className={styles.rating}>
             <img src={control} alt="" />
         </div>
-        <svg width="20" height="5" viewBox="0 0 20 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="17.5" cy="2.5" r="2.5" transform="rotate(90 17.5 2.5)" fill="#D9D9D9"/>
-        <circle cx="10" cy="2.5" r="2.5" transform="rotate(90 10 2.5)" fill="#D9D9D9"/>
-        <circle cx="2.5" cy="2.5" r="2.5" transform="rotate(90 2.5 2.5)" fill="#D9D9D9"/>
-        </svg>
+        <Dropdown button={
+          <button>
+
+          <svg width="5" height="20" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="2.5" cy="2.5" r="2.5" fill="#D9D9D9"/>
+          <circle cx="2.5" cy="10" r="2.5" fill="#D9D9D9"/>
+          <circle cx="2.5" cy="17.5" r="2.5" fill="#D9D9D9"/>
+          </svg>
+
+          </button>
+        }>
+          
+          <GenericList list={LIST}/>
+
+        </Dropdown>
+
       </div>
 
 
