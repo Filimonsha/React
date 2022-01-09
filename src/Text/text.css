@@ -1,0 +1,34 @@
+.green{
+    color:green;
+}
+.gray{
+    color:#999999;
+}
+.black{
+    color:black;
+}
+.D14{
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.D16{
+    font-size: 16px;
+}
+.D24{
+    font-size: 24px;
+}
+.D32{
+    font-size: 32px;
+}
+.list{
+    display: flex;
+}
+.list svg{
+    margin-right: 6px;
+}
+.list:not(:last-child){
+    padding-bottom: 11px;
+    margin-bottom: 9px;
+    border-bottom: 1px solid #ECECEC;
+}

@@ -5,7 +5,8 @@ import styles from './cardslist.css';
 export function CardList() {
   return (
     <ul className={styles.cardsList}>
-      <Card/>
+      <Card />
+      <Card />
       <li>One</li>
       <li>Two</li>
     </ul>
