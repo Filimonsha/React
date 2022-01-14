@@ -2,12 +2,14 @@ import classNames from 'classnames';
 import React from 'react';
 import styles from './text.css';
 
-type Tsize='14'|'16'|'24'|'32'
+type Tsize='14'|'16'|'20'|'24'|'32'
 
+type Tweight='300'|'400'|'500'|'600'|'700'
 export enum Colors{
   green='green',
   black='black',
   gray='gray',
+  orange='orange'
 }
 
 interface ITextProps{
@@ -16,6 +18,7 @@ interface ITextProps{
   color?:Colors,
   children?:React.ReactNode,
   listF?:boolean,
+  weight?:Tweight,
   // readonly className:'list',
 }
 
@@ -24,16 +27,17 @@ export function Text({
   size,
   color=Colors.black,
   children,
-  listF=false
-  
+  listF=false,
+  weight='400'
 }:ITextProps) {
 
   console.log(styles[`D${size}`])
-  const classes=classNames(
+  const classes = classNames(
     styles[`${color}`],
     styles[`D${size}`],
-    {[styles['list']]:listF},
-  )
+    styles[`D${weight}`],
+    { [styles["list"]]: listF }
+  );
   return (
     <As className={classes}>
       {children}

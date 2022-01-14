@@ -1,34 +1,57 @@
-.green{
-    color:green;
+.green {
+  color: green;
 }
-.gray{
-    color:#999999;
+.gray {
+  color: #999999;
 }
-.black{
-    color:black;
+.black {
+  color: black;
 }
-.D14{
-    font-size: 14px;
-    line-height: 17px;
+.orange {
+  color: #cc6633;
 }
 
-.D16{
-    font-size: 16px;
+.D14 {
+  font-size: 14px;
+  line-height: 17px;
 }
-.D24{
-    font-size: 24px;
+
+.D16 {
+  font-size: 16px;
 }
-.D32{
-    font-size: 32px;
+.D20 {
+  font-size: 20px;
+  line-height: 23px;
+  font-size: 16px;
 }
-.list{
-    display: flex;
+.D24 {
+  font-size: 24px;
 }
-.list svg{
-    margin-right: 6px;
+.D32 {
+  font-size: 32px;
 }
-.list:not(:last-child){
-    padding-bottom: 11px;
-    margin-bottom: 9px;
-    border-bottom: 1px solid #ECECEC;
+/* Weight */
+.D400 {
+    font-weight: 400;
+
+}
+.D500 {
+  font-weight: 500;
+}
+.D600 {
+  font-weight: 600;
+}
+.D700 {
+  font-weight: 700;
+}
+.list {
+  display: flex;
+}
+.list svg {
+  margin-right: 6px;
+}
+.list:not(:last-child) {
+  padding-bottom: 11px;
+  margin-bottom: 9px;
+  border-bottom: 1px solid #ececec;
 }
