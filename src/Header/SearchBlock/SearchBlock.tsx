@@ -2,8 +2,8 @@ import React from 'react';
 import { Colors, Text } from '../../Text';
 import styles from './searchblock.css';
 interface ISearchProps{
-  userName:string,
-  userImg:string,
+  userName:string|undefined,
+  userImg:string|undefined,
 }
 export function SearchBlock({
   userName,

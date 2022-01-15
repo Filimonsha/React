@@ -11,7 +11,6 @@ import { generateIndex } from './utils/generateIndex';
 
 
 
-
 export function App(){
     
     const [token,setToken] = useState('');
@@ -19,26 +18,14 @@ export function App(){
         console.log(window.location.href)
         const url = new URL(window.location.href);
         const args= new URLSearchParams(url.search)
-        console.log(url,args);
-
-        // setToken(url.searchParams.get('token'))
-
-        // const url = new URL(
-        //   "http://example.com?timeperiod=lasttwentyeightdays&pagesize=20"
-        // );
-
-        // const args = new URLSearchParams(url.search);
-
-        // console.log(
-        //   `timeperiod=${args.get("timeperiod")} and pagesize=${args.get(
-        //     "pagesize"
-        //   )}`
-        // );
+        // console.log(url.hash.split('&'));
+        // console.log(url.hash.split("&")[0].split('='));
+        setToken(url.hash.split("&")[0].split("=")[1]);
     },[])
-    
+    console.log(token)
     return(
         <Layout>
-            <Header token={'2'} />
+            <Header token={token} />
             <Content>
                 <CardList/>
                 <Dropdown button = {  

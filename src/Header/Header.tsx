@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./header.css";
 import { SearchBlock } from "./SearchBlock";
 import { SortBlock } from "./SortBlock";
 import { ThreadTitle } from "./ThreadTitle";
+interface IHeaderProps{
+  token:string
+}
 
-export function Header({props}:any) {
+interface IData{
+  uName?:string,
+  uImg?:string
+}
+import axios from "axios";
+export function Header(props:IHeaderProps) {
+  const [data, setData] = useState<IData>({});
+  
+  useEffect(()=>{
+    axios
+      .get("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axios.get("https://oauth.reddit.com/api/v1/me", {
+      headers: {
+        Authorization: `bearer ${props.token}`,
+      },
+    }).then( (res) =>{
+      const data = res.data
+      setData({
+        uName: data.name,
+        uImg: data.icon_img
+      })
+    }).catch(
+      (error)=>{
+        console.error(error)
+      }
+    )
+  },[props.token])
+
+
   return (
     <header className={styles.header}>
-      <SearchBlock userImg={props} userName={props} />
+      <SearchBlock userImg={data.uImg} userName={data.uName} />
       <ThreadTitle />
       <SortBlock />
     </header>
