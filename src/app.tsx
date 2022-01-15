@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ids } from 'webpack';
 import { CardList } from './CardList';
 import { Content } from './Content';
@@ -13,23 +13,32 @@ import { generateIndex } from './utils/generateIndex';
 
 
 export function App(){
-    const LIST=[
-        {
-            id:generateIndex(),
-            text:'Айтем 1',
-            onClick:()=>{console.log("Вы нажали")},
-            className: "first"
-        },
-        {
-            id:generateIndex(),
-            text:'Айтем 2',
-            onClick:()=>{console.log("Вы нажали")},
-            className: "second"
-        }
-    ]
+    
+    const [token,setToken] = useState('');
+    useEffect(()=>{
+        console.log(window.location.href)
+        const url = new URL(window.location.href);
+        const args= new URLSearchParams(url.search)
+        console.log(url,args);
+
+        // setToken(url.searchParams.get('token'))
+
+        // const url = new URL(
+        //   "http://example.com?timeperiod=lasttwentyeightdays&pagesize=20"
+        // );
+
+        // const args = new URLSearchParams(url.search);
+
+        // console.log(
+        //   `timeperiod=${args.get("timeperiod")} and pagesize=${args.get(
+        //     "pagesize"
+        //   )}`
+        // );
+    },[])
+    
     return(
         <Layout>
-            <Header/>
+            <Header token={'2'} />
             <Content>
                 <CardList/>
                 <Dropdown button = {  
@@ -37,7 +46,7 @@ export function App(){
                         pressME
                     </button>
                 }>
-                    <genericList.GenericList list={LIST} />
+                    {/* <genericList.GenericList list={LIST} /> */}
                 </Dropdown>
             </Content>
         </Layout>
