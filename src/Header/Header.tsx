@@ -16,20 +16,16 @@ export function Header(props:IHeaderProps) {
   const [data, setData] = useState<IData>({});
   
   useEffect(()=>{
-    axios
-      .get("https://www.thecocktaildb.com/api/json/v1/1/random.php")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
     axios.get("https://oauth.reddit.com/api/v1/me", {
       headers: {
-        Authorization: `bearer ${props.token}`,
-      },
+        Authorization:`bearer ${props.token}`
+      }
     }).then( (res) =>{
+      console.log(res)
+      
       const data = res.data
+      console.log(data);
       setData({
         uName: data.name,
         uImg: data.icon_img
