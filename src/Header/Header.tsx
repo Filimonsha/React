@@ -14,7 +14,7 @@ interface IData{
 import axios from "axios";
 export function Header(props:IHeaderProps) {
   const [data, setData] = useState<IData>({});
-  
+
   useEffect(()=>{
 
     axios.get("https://oauth.reddit.com/api/v1/me", {
@@ -22,10 +22,10 @@ export function Header(props:IHeaderProps) {
         Authorization:`bearer ${props.token}`
       }
     }).then( (res) =>{
-      console.log(res)
+      // console.log(res)
       
       const data = res.data
-      console.log(data);
+      // console.log(data);
       setData({
         uName: data.name,
         uImg: data.icon_img

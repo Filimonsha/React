@@ -1,17 +1,25 @@
 import React from 'react';
+import { postsContext } from '../context/postsContext';
 import { Text } from '../Text';
 import { Card } from './Card';
 import styles from './cardslist.css';
 
 export function CardList() {
+  const {Consumer} = postsContext
   return (
     <ul className={styles.cardsList}>
       <Card />
       <Card />
-      <Text size="14">Текст 1</Text>
-      <Text size="32" >Текст 1</Text>
-      <li>One</li>
-      <li>Two</li>
+      <Consumer >
+        {(data) => <Text size='16'>
+          {
+          data.map((el,index) => {
+            // const js = {...el,data}
+            console.log( el.id )})
+          
+          }
+          </Text>}
+      </Consumer>
     </ul>
   );
 }
