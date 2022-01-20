@@ -12,7 +12,11 @@ import * as text from "../../../../Text";
 
 import { MenuCard } from "../../MenuCard";
 
-export function CardPublicate() {
+interface ICArdPublicate{
+  author?:string|undefined
+}
+
+export function CardPublicate({author}:ICArdPublicate) {
   const LIST = [
     {
       id: generateIndex(),
@@ -126,7 +130,7 @@ export function CardPublicate() {
         </Dropdown>
       </div>
 
-      <p className={styles.name}>Константин Кодов</p>
+      <p className={styles.name}>{author?author:'Константин Кодов'}</p>
       <img src={img} alt="Ава" />
       <span>
         <span className={styles.deckstopSpan}>

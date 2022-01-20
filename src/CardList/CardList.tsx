@@ -8,17 +8,17 @@ export function CardList() {
   const {Consumer} = postsContext
   return (
     <ul className={styles.cardsList}>
-      <Card />
-      <Card />
-      <Consumer >
-        {(data) => <Text size='16'>
-          {
-          data.map((el,index) => {
-            // const js = {...el,data}
-            console.log( el.id )})
-          
-          }
-          </Text>}
+      {/* <Card />
+      <Card /> */}
+      <Consumer>
+        {(data) => (
+          <div>
+            {data.map((el, index) => {
+              // console.log(el,el.id,el.body)
+              return <Card objectt={el} />;
+            })}
+          </div>
+        )}
       </Consumer>
     </ul>
   );
