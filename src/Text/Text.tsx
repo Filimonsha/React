@@ -19,6 +19,7 @@ interface ITextProps{
   children?:React.ReactNode,
   listF?:boolean,
   weight?:Tweight,
+  className?:string
   // readonly className:'list',
 }
 
@@ -31,7 +32,6 @@ export function Text({
   weight='400'
 }:ITextProps) {
 
-  console.log(styles[`D${size}`])
   const classes = classNames(
     styles[`${color}`],
     styles[`D${size}`],

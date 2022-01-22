@@ -21,11 +21,8 @@ export function Header(props:IHeaderProps) {
       headers: {
         Authorization:`bearer ${props.token}`
       }
-    }).then( (res) =>{
-      // console.log(res)
-      
+    }).then( (res) =>{      
       const data = res.data
-      // console.log(data);
       setData({
         uName: data.name,
         uImg: data.icon_img

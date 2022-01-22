@@ -5,6 +5,7 @@
     width: 100%;
     flex:1;
 }
+
 .viewed{
     display:flex;
     align-items:center;
@@ -17,6 +18,11 @@
 }
 h4{
     margin-bottom: 10px;
+
+}
+h4:hover{
+    color:#999999;
+    cursor: pointer;
 }
 @media (max-width:1024px) {
     .headerCard{

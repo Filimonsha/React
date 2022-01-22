@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { postIsOpenContext } from '../../../context/postIsOpen';
+import { ModalPost } from '../../../ModalPost';
 import { CardPublicate } from './CardPublicate';
 import styles from './headercard.css';
 interface IHeaderCard{
@@ -7,8 +10,38 @@ interface IHeaderCard{
 }
 
 export function HeaderCard({title,body}:IHeaderCard) {
+
+  const node = document.querySelector('#open-post')
+  // const ref = useRef()
+  const [postIsOpen,setPostIsOpen] = useState(false)
+
+  const {Provider} = postIsOpenContext
+    useEffect(() => {
+
+    },[postIsOpen]);
+
+
   return (
     <div className={styles.headerCard}>
+      <Provider
+        value={{
+          postIsOpen: postIsOpen,
+          setpostIsOpen: setPostIsOpen,
+        }}
+      >
+        {postIsOpen && node
+          ? ReactDOM.createPortal(
+              <ModalPost
+                title={title}
+                body={body}
+                postIsOpen={postIsOpen}
+                setPostIsOpen={setPostIsOpen}
+              />,
+              node
+            )
+          : null}
+      </Provider>
+
       <div className={styles.comments}>
         <svg
           width="15"
@@ -39,8 +72,12 @@ export function HeaderCard({title,body}:IHeaderCard) {
         </svg>
         1 час назад
       </div>
-      <CardPublicate author={body}/>
-      <h4>
+      <CardPublicate author={body} />
+      <h4
+        onClick={() => {
+          setPostIsOpen(true);
+        }}
+      >
         {title ? title : "Реплицированные с зарубежных источников возможности "}
       </h4>
     </div>

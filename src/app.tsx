@@ -6,6 +6,7 @@ import { Content } from './Content';
 import { Dropdown } from './Content/Dropdown';
 import * as genericList from './Content/GenericList';
 import { postsContext } from './context/postsContext';
+import { isUserWantAnswer } from './context/userWantAnswer';
 import { Header } from './Header';
 import { usePostsData } from './hooks/usePostsData';
 import { Layout } from './Layout';
@@ -15,7 +16,9 @@ import { generateIndex } from './utils/generateIndex';
 
 
 export function App(){
-    
+      const [isUserWantF, setIsUserWantF] = useState(false);
+
+      const IsUserWantAnswerProvider = isUserWantAnswer.Provider;
     const [token,setToken] = useState('');
     const [postDatav2] = usePostsData()
     useEffect(()=>{
@@ -26,20 +29,28 @@ export function App(){
         // console.log(url.hash.split("&")[0].split('='));
         setToken(url.hash.split("&")[0].split("=")[1]);
     },[])
+    useEffect(()=>{
+      console.log(isUserWantF,'SSSSSSSSSSSSSSSS')
+    })
 
     const {Provider} = postsContext
 
     return (
-      <Provider value={postDatav2}>
-        <Layout>
-        <Header token={token} />
-        <Content>
-            <CardList />
-            <Dropdown button={<button>pressME</button>}>
-            {/* <genericList.GenericList list={LIST} /> */}
-            </Dropdown>
-        </Content>
-        </Layout>
-      </Provider>
+      <IsUserWantAnswerProvider value={
+        {isUserWant:isUserWantF,
+        setIsUserWant:setIsUserWantF}
+      }>
+        <Provider value={postDatav2}>
+          <Layout>
+            <Header token={token} />
+            <Content>
+              <CardList />
+              <Dropdown button={<button>pressME</button>}>
+                {/* <genericList.GenericList list={LIST} /> */}
+              </Dropdown>
+            </Content>
+          </Layout>
+        </Provider>
+      </IsUserWantAnswerProvider>
     );
 }

@@ -1,0 +1,36 @@
+.wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
+      padding: 52px 62px;
+  background: rgba(255, 255, 255, 1);
+
+  position: absolute;
+  top: 10%;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
+  border-radius: 7px;
+  overflow: scroll;
+}
+.headerBottom{
+  display: flex;
+  justify-content: space-between;
+}
+
+.header > div{
+  margin-bottom: 10px;
+}
+.header{
+  margin-bottom: 26px;
+}
+.mainContent{
+  display: flex;
+  flex-direction: column;
+
+}
+.mainContent div{
+  margin-bottom: 28px;
+}
+.postComment{
+  width: 100%;
+}
