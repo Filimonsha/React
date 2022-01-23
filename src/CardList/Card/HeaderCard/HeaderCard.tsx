@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { postIsOpenContext } from '../../../context/postIsOpen';
+import { isUserWantAnswer } from '../../../context/userWantAnswer';
 import { ModalPost } from '../../../ModalPost';
 import { CardPublicate } from './CardPublicate';
 import styles from './headercard.css';
@@ -13,12 +14,13 @@ export function HeaderCard({title,body}:IHeaderCard) {
 
   const node = document.querySelector('#open-post')
   // const ref = useRef()
+  const valueFropUserWant = useContext(isUserWantAnswer);
   const [postIsOpen,setPostIsOpen] = useState(false)
 
   const {Provider} = postIsOpenContext
     useEffect(() => {
-
-    },[postIsOpen]);
+      console.log(valueFropUserWant.isUserWant + ' ЭТО ИЗ ХЕДЕРА');
+    });
 
 
   return (
@@ -36,6 +38,7 @@ export function HeaderCard({title,body}:IHeaderCard) {
                 body={body}
                 postIsOpen={postIsOpen}
                 setPostIsOpen={setPostIsOpen}
+                userWantAnswer={valueFropUserWant.isUserWant}
               />,
               node
             )

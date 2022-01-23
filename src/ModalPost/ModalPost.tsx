@@ -11,6 +11,7 @@ interface IModalPost {
   body: string | undefined;
   postIsOpen: boolean;
   setPostIsOpen: Dispatch<React.SetStateAction<boolean>>;
+  userWantAnswer:boolean
 }
 
 export function ModalPost({
@@ -18,34 +19,34 @@ export function ModalPost({
   body,
   postIsOpen,
   setPostIsOpen,
+  userWantAnswer,
 }: IModalPost) {
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null);
 
+  const valueFropUserWant = useContext(isUserWantAnswer);
 
+  const [ohFuck, setOhFuck] = useState(false);
 
-  const valueFropUserWant = useContext(isUserWantAnswer)
-
-  const [ohFuck,setOhFuck] = useState(false)
-  
-  const value = useContext(postIsOpenContext)
-  useEffect(()=>{
-    setOhFuck(valueFropUserWant.isUserWant)
-    console.log(ohFuck, valueFropUserWant.isUserWant)
-  },[])
+  const value = useContext(postIsOpenContext);
+  useEffect(() => {
+    setOhFuck(valueFropUserWant.isUserWant);
+    console.log(ohFuck, valueFropUserWant.isUserWant);
+  }, []);
 
   useEffect(() => {
     function handlerClick(event: MouseEvent) {
       // console.log(valueFropUserWant.isUserWant,'эТО С МОДАЛКИ')
-      if (event.target instanceof Node &&!ref.current?.contains(event.target)) {
-        value.setpostIsOpen(false)
+      if (
+        event.target instanceof Node &&
+        !ref.current?.contains(event.target)
+      ) {
+        value.setpostIsOpen(false);
       }
       // console.log(valueFropUserWant.isUserWant, "эТО С МОДАЛКИ");
-      
     }
 
     document.addEventListener("click", handlerClick);
   }, [value.postIsOpen]);
-
 
   return (
     <div className={styles.wrap} ref={ref}>
@@ -86,7 +87,7 @@ export function ModalPost({
       {/* ОСтавиь комментарий  */}
 
       <div className={styles.postComment}>
-        {!valueFropUserWant.isUserWant ? (
+        {userWantAnswer ? (
           <CommentForm name={title} itIsAnswer={true}></CommentForm>
         ) : (
           <CommentForm name={title}></CommentForm>
@@ -96,9 +97,9 @@ export function ModalPost({
       {/* <Provider
         value={{ isUserWant: isUserWant, setIsUserWant: setIsUserWant }}
       > */}
-        <div className={styles.comments}>
-          <Comment></Comment>
-        </div>
+      <div className={styles.comments}>
+        <Comment author="Евгений Павлович"></Comment>
+      </div>
       {/* </Provider> */}
     </div>
   );

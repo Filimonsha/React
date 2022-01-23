@@ -1,18 +1,22 @@
-import React, { useContext } from 'react';
-import { isUserWantAnswer } from '../../../context/userWantAnswer';
-import styles from './comment.css';
+import React, { useContext, useState } from "react";
+import { isUserWantAnswer } from "../../../context/userWantAnswer";
+import { CommentForm } from "../CommentForm";
+import styles from "./comment.css";
 
-export function Comment() {
+interface IComment {
+  author: string;
+}
 
-  const value = useContext(isUserWantAnswer)
-  function handlerAnswer (){
+export function Comment({ author }: IComment) {
+  const value = useContext(isUserWantAnswer);
+  function handlerAnswer() {
     if (value.isUserWant) {
       value.setIsUserWant(false);
-    }else{
+    } else {
       value.setIsUserWant(true);
     }
-          
-          console.log(value.isUserWant);
+
+    console.log(value.isUserWant);
   }
 
   return (
@@ -26,11 +30,13 @@ export function Comment() {
       </div>
 
       <div className={styles.menu}>
-
         <button onClick={handlerAnswer}>Ответить</button>
         <button>Поделиться</button>
         <button>Пожаловаться</button>
       </div>
+      {value.isUserWant ? (
+        <CommentForm name={author} itIsAnswer={true} />
+      ) : null}
     </div>
   );
 }

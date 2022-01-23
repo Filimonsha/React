@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './commentform.css';
 
-interface ICommentForm{
-  name:string|undefined,
-  itIsAnswer?:boolean,
-  whichCommen?:string,
+interface ICommentForm {
+  name: string | undefined;
+  itIsAnswer?: boolean;
+  whichCommen?: string;
 }
 export function CommentForm({
   name,
   itIsAnswer = false,
   whichCommen = "Владимир Петров",
 }: ICommentForm) {
+
+  const ref = useRef<HTMLInputElement>(null)
+  useEffect(()=>{
+    if (itIsAnswer) {
+      console.log(ref.current?.focus());
+    }
+  },[])
+
   return (
     <div className={styles.wrap}>
       <form action="">
         {itIsAnswer ? (
-          <input
+          <input ref={ref}
             type="text"
             className={styles.input}
             defaultValue={whichCommen + ", "}
