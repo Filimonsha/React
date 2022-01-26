@@ -12,6 +12,7 @@ interface IData{
   uImg?:string
 }
 import axios from "axios";
+import { useDispatch } from "react-redux";
 export function Header(props:IHeaderProps) {
   const [data, setData] = useState<IData>({});
 
