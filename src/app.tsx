@@ -12,22 +12,20 @@ import { usePostsData } from "./hooks/usePostsData";
 import { Layout } from "./Layout";
 import "./main.global.css";
 import { generateIndex } from "./utils/generateIndex";
-import { Action, createStore } from "redux";
+import { Action, applyMiddleware, createStore, Middleware } from "redux";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import thunk, { ThunkAction } from 'redux-thunk'
 
 type RootState={
   commentText:string,
   token:string
 }
-const url = new URL(window.location.href);
-
 
 const initialState: RootState = {
   commentText: "Дарова",
-  token: url.hash.split("&")[0].split("=")[1],
+  token:''
 };
-console.log(url.hash.split("&")[0].split("=")[1]);
 const rootReducer: Reducer<RootState|any,any> = (state=initialState,action) =>{
   switch (action.type) {
     case "setToken":
@@ -41,22 +39,52 @@ const rootReducer: Reducer<RootState|any,any> = (state=initialState,action) =>{
       return state
   }
 }
+// Пример простого мидлвара который изменяет полученный экшен и передает дальше
+const myFirstMiddleware:Middleware=(store) =>(next)=>(action)=>{
+  next({
+    ...action,
+    name:'lol'
+  })
+}
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(thunk)
+));
+
+// Пример асинхронки
+const timeout=():ThunkAction<void,RootState,unknown,Action<string>> => (dispatch,getState) =>{
+  dispatch({
+    type:'Start'
+  })
+  setTimeout(()=>{
+    dispatch({
+      type:'End'
+    })
+  },3000)
+}
+// Синхронный thunk
+
+const saveToken= ():ThunkAction<void,RootState,unknown,Action<string>> =>(dispatch,getState) =>{
+  const url = new URL(window.location.href);
+  dispatch({
+    type: "setToken",
+    token: url.hash.split("&")[0].split("=")[1],
+  });
+}
+
 
 
 export function App() {
-
-  // const token = useSelector<RootState,string>(state => state.token)
-
-  // const [token, setToken] = useState("");
   const [postDatav2] = usePostsData();
   useEffect(() => {
-    // console.log(token,value,'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-    // const url = new URL(window.location.href);
-    // setToken(url.hash.split("&")[0].split("=")[1]);
-    // dispatch({type:"setToken", text:url.hash.split("&")[0].split("=")[1]});
+    
+    // store.dispatch({
+    //   type: "setToken",
+    //   token: url.hash.split("&")[0].split("=")[1],
+    // });
+    store.dispatch(saveToken())
   }, []);
+
 
 
   const PostsContextProvider = postsContext.Provider;
