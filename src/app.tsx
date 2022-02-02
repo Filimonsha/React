@@ -16,8 +16,9 @@ import { Action, applyMiddleware, createStore, Middleware } from "redux";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk, { ThunkAction } from 'redux-thunk'
+import { saveToken } from "./thunks/saveToken";
 
-type RootState={
+export type RootState={
   commentText:string,
   token:string
 }
@@ -62,30 +63,24 @@ const timeout=():ThunkAction<void,RootState,unknown,Action<string>> => (dispatch
     })
   },3000)
 }
-// Синхронный thunk
+// // Синхронный thunk
 
-const saveToken= ():ThunkAction<void,RootState,unknown,Action<string>> =>(dispatch,getState) =>{
-  const url = new URL(window.location.href);
-  dispatch({
-    type: "setToken",
-    token: url.hash.split("&")[0].split("=")[1],
-  });
-}
+// const saveToken= ():ThunkAction<void,RootState,unknown,Action<string>> =>(dispatch,getState) =>{
+//   const url = new URL(window.location.href);
+//   dispatch({
+//     type: "setToken",
+//     token: url.hash.split("&")[0].split("=")[1],
+//   });
+// }
 
 
 
 export function App() {
   const [postDatav2] = usePostsData();
   useEffect(() => {
-    
-    // store.dispatch({
-    //   type: "setToken",
-    //   token: url.hash.split("&")[0].split("=")[1],
-    // });
+
     store.dispatch(saveToken())
   }, []);
-
-
 
   const PostsContextProvider = postsContext.Provider;
 
@@ -93,7 +88,7 @@ export function App() {
     <Provider store={store}>
       <PostsContextProvider value={postDatav2}>
         <Layout>
-          <Header token={initialState.token} />
+          <Header token={store.getState().token} />
           <Content>
             <CardList />
             <Dropdown button={<button>pressME</button>}>

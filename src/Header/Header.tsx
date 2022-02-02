@@ -24,13 +24,15 @@ export function Header(props:IHeaderProps) {
       }
     }).then( (res) =>{      
       const data = res.data
+      const features = data.features.mweb_comments_banner.owner
       setData({
-        uName: data.name,
+        uName: features,
         uImg: data.icon_img
       })
+      console.log(data)
     }).catch(
       (error)=>{
-        console.error(error)
+        console.error(error + 'ОШИБКА ')
       }
     )
   },[props.token])
