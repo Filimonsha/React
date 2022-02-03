@@ -26,7 +26,10 @@ export function CommentForm({
         comment:''
       },
       onSubmit: (values) =>{
-        alert(values.comment)
+        if (values.comment) {
+          return alert(values.comment);
+        }
+        return alert('Введите коммент ')
       }
     }
     
