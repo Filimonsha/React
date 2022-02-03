@@ -1,3 +1,4 @@
+import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import styles from './commentform.css';
 
@@ -19,20 +20,38 @@ export function CommentForm({
     }
   },[])
 
+  const formik = useFormik(
+    {
+      initialValues:{
+        comment:''
+      },
+      onSubmit: (values) =>{
+        alert(values.comment)
+      }
+    }
+    
+  )
+
   return (
     <div className={styles.wrap}>
-      <form action="">
+      <form action="" onSubmit={formik.handleSubmit}>
         {itIsAnswer ? (
-          <input ref={ref}
+          <input
+            ref={ref}
             type="text"
             className={styles.input}
             defaultValue={whichCommen + ", "}
+            onChange={formik.handleChange}
+            value={whichCommen + ", " + formik.values.comment}
           />
         ) : (
           <input
+            id="comment"
             type="text"
             className={styles.input}
-            defaultValue={name + ", оставьте ваш комментарий"}
+            placeholder={name + ", оставьте ваш комментарий"}
+            onChange={formik.handleChange}
+            value={formik.values.comment}
           />
         )}
         <div className={styles.menu}>
