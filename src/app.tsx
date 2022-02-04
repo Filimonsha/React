@@ -17,25 +17,32 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk, { ThunkAction } from 'redux-thunk'
 import { saveToken } from "./thunks/saveToken";
+import { savePosts } from "./thunks/savePosts";
 
 export type RootState={
   commentText:string,
-  token:string
+  token:string,
+  postData:any[]
 }
 
 const initialState: RootState = {
   commentText: "Дарова",
-  token:''
+  token:'',
+  postData:[]
 };
 const rootReducer: Reducer<RootState|any,any> = (state=initialState,action) =>{
   switch (action.type) {
     case "setToken":
-      
+
       return{
         ...state,
         token:action.token
       }
-  
+    case 'savePosts':
+      return{
+        ...state,
+        postData:action.posts
+      }
     default:
       return state
   }
@@ -63,23 +70,18 @@ const timeout=():ThunkAction<void,RootState,unknown,Action<string>> => (dispatch
     })
   },3000)
 }
-// // Синхронный thunk
 
-// const saveToken= ():ThunkAction<void,RootState,unknown,Action<string>> =>(dispatch,getState) =>{
-//   const url = new URL(window.location.href);
-//   dispatch({
-//     type: "setToken",
-//     token: url.hash.split("&")[0].split("=")[1],
-//   });
-// }
 
 
 
 export function App() {
   const [postDatav2] = usePostsData();
+  const posts = store.getState().post
   useEffect(() => {
 
     store.dispatch(saveToken())
+    // store.dispatch(savePosts())
+
   }, []);
 
   const PostsContextProvider = postsContext.Provider;

@@ -18,10 +18,6 @@ export function HeaderCard({title,body}:IHeaderCard) {
   const [postIsOpen,setPostIsOpen] = useState(false)
 
   const {Provider} = postIsOpenContext
-    useEffect(() => {
-      console.log(valueFropUserWant.isUserWant + ' ЭТО ИЗ ХЕДЕРА');
-    });
-
 
   return (
     <div className={styles.headerCard}>

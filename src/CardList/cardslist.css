@@ -6,3 +6,7 @@
 ul{
   padding: 0;
 }
+.loadMore{
+  padding: 40px;
+  border: 1px solid orange;
+}

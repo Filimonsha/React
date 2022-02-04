@@ -17,7 +17,9 @@ export function Header(props:IHeaderProps) {
   const [data, setData] = useState<IData>({});
 
   useEffect(()=>{
-
+    if (!props.token) {
+      return
+    }
     axios.get("https://oauth.reddit.com/api/v1/me", {
       headers: {
         Authorization:`bearer ${props.token}`
@@ -32,7 +34,7 @@ export function Header(props:IHeaderProps) {
       console.log(data)
     }).catch(
       (error)=>{
-        console.error(error + 'ОШИБКА ')
+        console.error(error, 'ОШИБКА С ME', props.token)
       }
     )
   },[props.token])
