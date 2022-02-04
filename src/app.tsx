@@ -93,9 +93,6 @@ export function App() {
           <Header token={store.getState().token} />
           <Content>
             <CardList />
-            <Dropdown button={<button>pressME</button>}>
-              {/* <genericList.GenericList list={LIST} /> */}
-            </Dropdown>
           </Content>
         </Layout>
       </PostsContextProvider>

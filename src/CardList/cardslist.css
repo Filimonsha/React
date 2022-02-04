@@ -7,6 +7,8 @@ ul{
   padding: 0;
 }
 .loadMore{
+  text-align: center;
   padding: 40px;
   border: 1px solid orange;
+  background: rgba(255, 223, 163, 0.288);
 }
