@@ -1,4 +1,5 @@
-import React, { Dispatch, useContext, useEffect, useRef, useState } from "react";
+import React, { Dispatch, Ref, useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Comment } from "../CardList/Card/Comment";
 import { CommentForm } from "../CardList/Card/CommentForm";
 import { postIsOpenContext } from "../context/postIsOpen";
@@ -9,18 +10,13 @@ import styles from "./modalpost.css";
 interface IModalPost {
   title: string | undefined;
   body: string | undefined;
-  postIsOpen: boolean;
-  setPostIsOpen: Dispatch<React.SetStateAction<boolean>>;
-  userWantAnswer:boolean
+  // postIsOpen: boolean;
+  // setPostIsOpen: Dispatch<React.SetStateAction<boolean>>;
+  userWantAnswer:boolean,
+  fatherRef:React.RefObject<HTMLDivElement>,
 }
 
-export function ModalPost({
-  title,
-  body,
-  postIsOpen,
-  setPostIsOpen,
-  userWantAnswer,
-}: IModalPost) {
+export function ModalPost({ title, body, userWantAnswer,fatherRef}: IModalPost) {
   const ref = useRef<HTMLDivElement>(null);
 
   const valueFropUserWant = useContext(isUserWantAnswer);
@@ -32,21 +28,25 @@ export function ModalPost({
     setOhFuck(valueFropUserWant.isUserWant);
     console.log(ohFuck, valueFropUserWant.isUserWant);
   }, []);
+  const navigate = useNavigate()
 
-  useEffect(() => {
+
     function handlerClick(event: MouseEvent) {
-      // console.log(valueFropUserWant.isUserWant,'эТО С МОДАЛКИ')
       if (
         event.target instanceof Node &&
         !ref.current?.contains(event.target)
       ) {
-        value.setpostIsOpen(false);
+        // value.setpostIsOpen(false);
+        fatherRef.current?.remove
+        console.log(fatherRef.current,'ТЫК')
+        navigate(-1)
       }
-      // console.log(valueFropUserWant.isUserWant, "эТО С МОДАЛКИ");
-    }
 
-    document.addEventListener("click", handlerClick);
-  }, [value.postIsOpen]);
+    }
+    useEffect(()=>{
+      fatherRef.current?.addEventListener("click", handlerClick);
+
+    })
 
   return (
     <div className={styles.wrap} ref={ref}>

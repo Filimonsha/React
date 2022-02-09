@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
+import { Outlet, Route, Routes } from "react-router-dom";
 import { RootState } from "../app";
 import { postsContext } from "../context/postsContext";
 import { Text } from "../Text";
@@ -57,27 +58,38 @@ export function CardList() {
         observer.unobserve(ref.current);
       }
     };
-  }, [ref.current, pages,isThirdLoad]);
+  }, [ref.current, pages, isThirdLoad]);
 
   return (
     <ul className={styles.cardsList}>
-      {posts.map((el: { id?: any; title: string; body: string }) => {
+      <Outlet/>
+      {posts.map((el: { id: string; title: string; body: string }) => {
         return <Card key={el.id} objectt={el} />;
       })}
       <div id="endOfList" ref={ref}></div>
       {isThirdLoad && <div className={styles.loadMore} onClick={()=>{
         setIsThirdLoad(false)
       }}> Загрузить еще?</div>}
-      {/* <Consumer>
-        {(data) => (
-          <div>
-            {data.map((el, index) => {
-              // console.log(el,el.id,el.body)
-              return <Card objectt={el} />;
-            })}
-          </div>
-        )}
-      </Consumer> */}
+
     </ul>
+    // <ul className={styles.cardsList}>
+    //   <Routes>
+    //     {posts.map((el: { id?: any; title: string; body: string }) => {
+    //       return <Route path=':id' element={<Card key={el.id} objectt={el} />}/>
+    //       //  <Card key={el.id} objectt={el} />;
+    //     })}
+    //     <div id="endOfList" ref={ref}></div>
+    //     {isThirdLoad && (
+    //       <div
+    //         className={styles.loadMore}
+    //         onClick={() => {
+    //           setIsThirdLoad(false);
+    //         }}
+    //       >
+    //         Загрузить еще?
+    //       </div>
+    //     )}
+    //   </Routes>
+    // </ul>
   );
 }
