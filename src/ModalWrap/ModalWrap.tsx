@@ -21,6 +21,7 @@ export function ModalWrap() {
   // const location = useLocation<LocationState>();
   // const ss:SS = params.state
 // const { state } = params.state as locationType;
+// ww
   
   useEffect(()=>{
     console.log(params , 'аааааааа')
