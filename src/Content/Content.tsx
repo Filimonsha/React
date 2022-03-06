@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useStore } from 'react-redux';
 import styles from './content.css';
 interface IProps{
   children?:React.ReactNode;

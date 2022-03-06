@@ -41,7 +41,7 @@ export function CardPublicate({ author }: ICArdPublicate) {
         <div className={styles.rating}>
           <img src={control} alt="" />
         </div>
-        <Dropdown
+        <Dropdown 
           button={
             <button>
               <MenuIcon />

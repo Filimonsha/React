@@ -81,6 +81,7 @@ const timeout =
 export function App() {
   const [postDatav2] = usePostsData();
   const posts = store.getState().post;
+  
 
   useEffect(() => {
     store.dispatch(saveToken());
@@ -105,6 +106,7 @@ export function App() {
                 {/* <Route path={`/posts/*`} element={<p>fekwfwfekj</p>} /> */}
                 <Route path="*" element={<p>Страница не найдена</p>} />
               </Routes>
+
               {/* // <CardList /> */}
             </Content>
           </Layout>

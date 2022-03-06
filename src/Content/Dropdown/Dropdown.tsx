@@ -9,14 +9,14 @@ interface IDropdawnProps {
   children: ReactNode;
 }
 
-export function Dropdown({ button, children }: IDropdawnProps) {
+export function Dropdown(props: IDropdawnProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const node = document.querySelector("#drop-down");
   const ref = useRef<HTMLDivElement>(null)
   const rect =ref.current?.getBoundingClientRect()
   return (
     <div>
-      <div onClick={() => setIsOpen(!isOpen)} ref={ref}>{button}</div>
+      <div onClick={() => setIsOpen(!isOpen)} ref={ref}>{props.button}</div>
       {isOpen && (
         node &&
         (ReactDOM.createPortal
@@ -29,8 +29,8 @@ export function Dropdown({ button, children }: IDropdawnProps) {
           }}
         >
 
-          {children}
-          <div className={styles.close}>Закрыть</div>
+          {props.children}
+          <div className={styles.close} >Закрыть</div>
         </div>),node))
       )}
     </div>
